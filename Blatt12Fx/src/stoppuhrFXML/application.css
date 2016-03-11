@@ -1,0 +1,22 @@
+@font-face {
+src: url('EHSMB.TTF');
+}
+
+Label {
+	-fx-background-color: black;
+	-fx-text-fill: #00FF00;
+	-fx-font-family: 'Electronic Highway Sign';
+ 	-fx-font-size: 48.0pt;
+	-fx-alignment: center;
+}
+
+HBox {
+	-fx-background-color:lightgray;
+	-fx-alignment: center;
+	-fx-pref-height: 60.0px;
+}
+
+Button {
+	-fx-padding: 20.0px;
+	-fx-background-insets: 10.0px;
+}

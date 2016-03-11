@@ -1,0 +1,22 @@
+#display {
+	-fx-background-color: black;
+	-fx-text-fill: #00FF00;
+	-fx-font-family: 'Lucida Console';
+	-fx-font-size: 32pt;
+	-fx-alignment:  center-right;
+	-fx-padding:  10px;
+}
+
+HBox {
+	-fx-alignment: center;
+}
+
+Button, CheckBox {
+	-fx-padding: 12;
+	-fx-background-insets: 3;
+}
+
+TextField {
+	-fx-alignment: center-right;
+}
+

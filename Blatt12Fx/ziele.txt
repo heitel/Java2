@@ -1,0 +1,10 @@
+Karlsruhe~~~17.67
+Heidelberg~~~13.45
+Heilbronn~~~8.30
+Eppingen~~~4.24
+Meckesheim~~~2.89
+Adersbach~~~1.54
+Frankfurt~~~23.50
+Rom~~~345.10
+Rohrbach~~~2.50
+Kirchhardt~~~2.87

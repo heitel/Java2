@@ -1,0 +1,17 @@
+Label {
+	-fx-background-color: black;
+	-fx-text-fill: #00FF00;
+	-fx-font-family: 'Electronic Highway Sign';
+	-fx-font-size: 48pt;
+	-fx-alignment: center;
+}
+
+HBox {
+	-fx-background-color:lightgray;
+	-fx-alignment: center;
+}
+
+Button {
+	-fx-padding: 20px;
+	-fx-background-insets: 10px;
+}
