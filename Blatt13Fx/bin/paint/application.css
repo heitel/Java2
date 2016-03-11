@@ -1,0 +1,9 @@
+PaintPane {
+	-fx-background-color: lightgray;
+}
+
+Pane {
+	-fx-border-color: gray;
+	-fx-border-width:  1;
+	-fx-background-color: transparent;
+}
