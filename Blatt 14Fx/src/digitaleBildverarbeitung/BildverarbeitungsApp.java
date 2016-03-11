@@ -1,18 +1,20 @@
 package digitaleBildverarbeitung;
 
 import javafx.application.Application;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class BildverarbeitungsApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = new BorderPane();
+			setUserAgentStylesheet(STYLESHEET_CASPIAN);
+	
+			BildverarbeitungsPane root = new BildverarbeitungsPane();
 			Scene scene = new Scene(root, 400, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Digitale Bildverarbeitung");
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
