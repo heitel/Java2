@@ -15,6 +15,8 @@ public class BildverarbeitungsApp extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Digitale Bildverarbeitung");
+			primaryStage.setX(100);
+			primaryStage.setY(100);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
