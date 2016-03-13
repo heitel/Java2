@@ -8,7 +8,7 @@ public class BildverarbeitungsApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			setUserAgentStylesheet(STYLESHEET_CASPIAN);
+	//		setUserAgentStylesheet(STYLESHEET_CASPIAN);
 	
 			BildverarbeitungsPane root = new BildverarbeitungsPane();
 			Scene scene = new Scene(root, 400, 400);
