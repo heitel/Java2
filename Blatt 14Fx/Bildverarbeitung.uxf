@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>100</y>
+      <w>300</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>BildverarbeitungsPane
+--
+_-TITLE : String = "Digitale Bildverarbeitung - "_
+-canvas : ImageCanvas
+-f : File
+--
++BildverarbeitungsPane()
+-buildMenu() : MenuBar
+-doNew(e : ActionEvent): void
+-doOpen(e : ActionEvent): void
+-doSave(e : ActionEvent): void
+-doSaveAs(e : ActionEvent): void
+-doPrint(e : ActionEvent): void
+-writeFile(): void
+-readFile(f : File): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>100</y>
+      <w>330</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>ImageCanvas
+--
+-img : WritableImage
+-undoStack : Stack&lt;WritableImage&gt;
+--
++ImageCanvas()
+#draw() : void
++doFilter(e : ActionEvent) : void
++doBack(e : ActionEvent) : void
++setImg(img : WritableImage) : void
++getImg() : WritableImage
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>20</y>
+      <w>150</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>/ResizeableCanvas/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>20</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>BorderPane</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>40</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>40</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>130</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+r1=canvas</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
