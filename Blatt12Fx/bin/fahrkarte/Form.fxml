@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -9,45 +11,66 @@
    <center>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
         <items>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <top>
-                  <AnchorPane BorderPane.alignment="CENTER">
-                     <children>
-                        <Label fx:id="display" text="0,00 €" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </top>
-               <center>
-                  <ListView fx:id="list" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <TextArea fx:id="output" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
-               <top>
-                  <VBox prefHeight="72.0" prefWidth="389.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="389.0">
-                           <children>
-                              <CheckBox fx:id="first" mnemonicParsing="false" onAction="#doCheckBox" text="1. Klasse" />
-                              <CheckBox fx:id="bahnCard" mnemonicParsing="false" onAction="#doCheckBox" text="Bahncard" />
-                              <Button fx:id="clear" mnemonicParsing="false" onAction="#doClear" text="Löschen" />
-                           </children>
-                        </HBox>
-                        <BorderPane prefHeight="49.0" prefWidth="389.0">
-                           <center>
-                              <TextField fx:id="input" BorderPane.alignment="CENTER" />
-                           </center>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ListView fx:id="list" layoutX="71.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <center>
+                        <TextArea fx:id="output" BorderPane.alignment="CENTER" />
+                     </center>
+                     <top>
+                        <BorderPane BorderPane.alignment="CENTER">
+                           <top>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <CheckBox fx:id="first" mnemonicParsing="false" onAction="#doCheckBox" text="1. Klasse">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="bahnCard" mnemonicParsing="false" onAction="#doCheckBox" text="BahnCard">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <Button fx:id="clear" mnemonicParsing="false" onAction="#doClear" text="Löschen">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </top>
                            <right>
                               <Button fx:id="kaufen" mnemonicParsing="false" onAction="#doKaufen" text="Kaufen" BorderPane.alignment="CENTER" />
                            </right>
+                           <center>
+                              <TextField fx:id="input" alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" />
+                           </center>
                         </BorderPane>
-                     </children>
-                  </VBox>
-               </top>
-            </BorderPane>
+                     </top>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
         </items>
       </SplitPane>
    </center>
+   <top>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="display" alignment="CENTER_RIGHT" style="-fx-background-color: black;" text="0,00 €" textFill="LIME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="Lucida Console" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

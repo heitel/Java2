@@ -49,7 +49,7 @@
                               <Button fx:id="kaufen" mnemonicParsing="false" onAction="#doKaufen" text="Kaufen" BorderPane.alignment="CENTER" />
                            </right>
                            <center>
-                              <TextField fx:id="input" BorderPane.alignment="CENTER" />
+                              <TextField fx:id="input" alignment="CENTER_RIGHT" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                      </top>
@@ -64,8 +64,11 @@
          <children>
             <Label fx:id="display" alignment="CENTER_RIGHT" style="-fx-background-color: black;" text="0,00 €" textFill="LIME" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
-                  <Font name="Titillium Web" size="36.0" />
+                  <Font name="Lucida Console" size="36.0" />
                </font>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </Label>
          </children>
       </AnchorPane>
