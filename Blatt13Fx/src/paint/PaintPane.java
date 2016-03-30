@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.geometry.Point2D;
@@ -26,18 +25,19 @@ import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.transform.Transform;
 import javafx.stage.FileChooser;
 
 public class PaintPane extends BorderPane {
@@ -53,7 +53,8 @@ public class PaintPane extends BorderPane {
 	private ComboBox<String> background = new ComboBox<>();
 	private ColorPicker backPicker = new ColorPicker(Color.WHITE);
 	private StackPane stack;
-	
+	private File f;
+
 	public PaintPane() {
 		VBox box = new VBox(buildMenu(), buildToolBar());
 		setTop(box);
@@ -93,20 +94,24 @@ public class PaintPane extends BorderPane {
 
 		backPicker.setTooltip(new Tooltip("Hintergrundfarbe"));
 		backPicker.setOnAction(e -> doBackPick(e));
+		backPicker.setDisable(true);
 
 		background.getItems().addAll("Einfarbig", "Transparent", "Regenbogen", "Tapete", "Holz", "Struktur");
-		background.getSelectionModel().select(0);
+		background.getSelectionModel().select(1);
 		background.setOnAction(e -> doBackgroundStyle(e));
 		return new ToolBar(picker, thick, new Separator(), background, backPicker);
 	}
-	
+
 	private void buildPane() {
 		stack = new StackPane(back, canvas);
-		Pane pane = new Pane(stack);
-//		pane.setMinSize(WIDTH, HEIGHT);
-//		pane.setMaxSize(WIDTH, HEIGHT);
+		AnchorPane anchor = new AnchorPane(stack);
+		AnchorPane.setLeftAnchor(stack, 3d);
+		AnchorPane.setRightAnchor(stack, 3d);
+		AnchorPane.setTopAnchor(stack, 3d);
+		AnchorPane.setBottomAnchor(stack, 3d);
+		Pane pane = new Pane(anchor);
 		setCenter(pane);
-	
+
 		canvas.setOnMouseDragged(e -> drag(e));
 		canvas.setOnMousePressed(e -> click(e));
 	}
@@ -116,7 +121,7 @@ public class PaintPane extends BorderPane {
 	}
 
 	private void setBackColor() {
-		back.setStyle("-fx-background-color: " + toRGBCode(backPicker.getValue())+";");
+		back.setStyle("-fx-background-color: " + toRGBCode(backPicker.getValue()) + ";");
 	}
 
 	private void doBackgroundStyle(ActionEvent e) {
@@ -128,7 +133,7 @@ public class PaintPane extends BorderPane {
 			setBackColor();
 			break;
 		case 1:
-			back.setStyle("-fx-background-colot: transparent;");
+			back.setStyle("-fx-background-color: transparent;");
 			break;
 		case 2:
 			back.setStyle("-fx-background-color: linear-gradient(to top left, red, yellow, green, blue, magenta);");
@@ -136,7 +141,7 @@ public class PaintPane extends BorderPane {
 		case 3:
 		case 4:
 		case 5:
-			String img = getClass().getResource(NAME[sel-3]).toExternalForm();
+			String img = getClass().getResource(NAME[sel - 3]).toExternalForm();
 			back.setStyle("-fx-background-image: url('" + img + "');");
 			break;
 		default:
@@ -151,22 +156,25 @@ public class PaintPane extends BorderPane {
 
 	private void doNew(ActionEvent e) {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());		
+		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
-	private void doOpen(ActionEvent e) {
+	private void doOpen(ActionEvent ev) {
 		try {
 			FileChooser chooser = new FileChooser();
-			File f = chooser.showOpenDialog(null);
-			if (f!=null) {
+			chooser.setInitialDirectory(new File("."));
+			File f = chooser.showOpenDialog(getScene().getWindow());
+			if (f != null) {
 				BufferedImage bimg = ImageIO.read(f);
 				WritableImage wimg = SwingFXUtils.toFXImage(bimg, null);
 				stack.getChildren().remove(1);
 				canvas = new Canvas(wimg.getWidth(), wimg.getHeight());
 				stack.getChildren().add(canvas);
 				GraphicsContext gc = canvas.getGraphicsContext2D();
-				gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 				gc.drawImage(wimg, 0, 0);
+				canvas.setOnMouseDragged(e -> drag(e));
+				canvas.setOnMousePressed(e -> click(e));
+				this.f = f;
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -174,23 +182,28 @@ public class PaintPane extends BorderPane {
 	}
 
 	private void doSave(ActionEvent e) {
-		System.out.println("->Sichern");
-	}
-
-	private void doSaveAs(ActionEvent e) {
 		try {
-			FileChooser chooser = new FileChooser();
-			File f = chooser.showSaveDialog(null);
-			if (f!=null) {
-				WritableImage wimg = new WritableImage((int)stack.getWidth(), (int)stack.getHeight());
+			if (f != null) {
 				SnapshotParameters param = new SnapshotParameters();
 				param.setFill(Color.TRANSPARENT);
-				stack.snapshot(param, wimg);
+				WritableImage wimg = stack.snapshot(param, null);
 				BufferedImage bimg = SwingFXUtils.fromFXImage(wimg, null);
 				ImageIO.write(bimg, "png", f);
+			} else {
+				doSaveAs(null);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+	}
+
+	private void doSaveAs(ActionEvent e) {
+		FileChooser chooser = new FileChooser();
+		chooser.setInitialDirectory(new File("."));
+		File f = chooser.showSaveDialog(getScene().getWindow());
+		if (f != null) {
+			this.f = f;
+			doSave(null);
 		}
 	}
 
@@ -207,25 +220,24 @@ public class PaintPane extends BorderPane {
 
 					double imgW = stack.getWidth();
 					double imgH = stack.getHeight();
-					double scale = Math.min(height/imgH, width/imgW);
-					
-					stack.setScaleX(scale);
-					stack.setScaleY(scale);
-					stack.setTranslateX((width-imgW)/2);
-					stack.setTranslateY((height-imgH)/2);
-					boolean success = job.printPage(stack);
+					double scale = Math.min(height / imgH, width / imgW);
+
+					SnapshotParameters param = new SnapshotParameters();
+					param.setFill(Color.TRANSPARENT);
+					WritableImage wimg = stack.snapshot(param, null);
+					ImageView iv = new ImageView(wimg);
+
+					iv.setScaleX(scale);
+					iv.setScaleY(scale);
+					iv.setTranslateX((width - imgW) / 2);
+					iv.setTranslateY((height - imgH) / 2);
+					boolean success = job.printPage(iv);
 					if (success) {
 						job.endJob();
 					}
-					ObservableList<Transform> t = stack.getTransforms();
-					for (Transform transform : t) {
-						System.out.println(transform);
-					}
-					//stack.setScaleX(1);stack.setScaleY(1);stack.setTranslateX(0);stack.setTranslateY(0);
 				}
 			}
 		}
-
 	}
 
 	private void click(MouseEvent e) {
@@ -235,12 +247,12 @@ public class PaintPane extends BorderPane {
 	private void drag(MouseEvent e) {
 		double x = e.getX();
 		double y = e.getY();
-
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		gc.setStroke(picker.getValue());
-		gc.setLineCap(StrokeLineCap.ROUND);
-		gc.setLineWidth(thick.getValue());
+		
 		if (oldPoint != null) {
+			GraphicsContext gc = canvas.getGraphicsContext2D();
+			gc.setStroke(picker.getValue());
+			gc.setLineCap(StrokeLineCap.ROUND);
+			gc.setLineWidth(thick.getValue());
 			gc.strokeLine(oldPoint.getX(), oldPoint.getY(), x, y);
 		}
 		oldPoint = new Point2D(x, y);
