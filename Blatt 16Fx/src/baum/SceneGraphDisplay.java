@@ -12,16 +12,21 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 
-public class ShowSceneGraph {
-	private final static boolean REVERSE = false;
-	private static int blank = REVERSE ? -1 : 0;
+public class SceneGraphDisplay {
+	private boolean reverse;
+	private int blank;
 
 
-	public static void showSceneGraph(String info, Node node) {
+	public SceneGraphDisplay(boolean reverse) {
+		this.reverse = reverse;
+		blank = reverse ? -1 : 0;
+	}
+
+	public void showSceneGraph(String info, Node node) {
 		if (node == null)
 			return;
 
-		if (!REVERSE) {
+		if (!reverse) {
 			print(info, node.getClass().getSimpleName());
 		}
 
@@ -51,14 +56,14 @@ public class ShowSceneGraph {
 			}
 		}
 
-		if (REVERSE) {
+		if (reverse) {
 			print(node.getClass().getSimpleName(), info);
 
 		}
 		blank--;
 	}
 
-	private static void showBorderPane(BorderPane bp) {
+	private void showBorderPane(BorderPane bp) {
 		showSceneGraph("Top:", bp.getTop());
 		showSceneGraph("Left:", bp.getLeft());
 		showSceneGraph("Right:", bp.getRight());
@@ -66,7 +71,7 @@ public class ShowSceneGraph {
 		showSceneGraph("Center:", bp.getCenter());
 	}
 
-	private static void showMenuBar(Node node) {
+	private void showMenuBar(Node node) {
 		MenuBar mb = (MenuBar) node;
 		ObservableList<Menu> menu = mb.getMenus();
 		for (Menu item : menu) {
@@ -74,7 +79,7 @@ public class ShowSceneGraph {
 		}
 	}
 
-	private static void showMenu(Menu item) {
+	private void showMenu(Menu item) {
 		showBlank(blank);
 		System.out.println("Menu: " + item.getText());
 		blank++;
@@ -86,7 +91,7 @@ public class ShowSceneGraph {
 		blank--;
 	}
 
-	private static void print(String info, String txt) {
+	private void print(String info, String txt) {
 		if (info != null) {
 			showBlank(blank);
 			System.out.println(info);
@@ -98,7 +103,7 @@ public class ShowSceneGraph {
 		}
 	}
 
-	private static void showBlank(int anz) {
+	private void showBlank(int anz) {
 		for (int i = 0; i < anz; i++) {
 			System.out.print("   ");
 		}

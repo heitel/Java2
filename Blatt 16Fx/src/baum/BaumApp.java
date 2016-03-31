@@ -9,7 +9,8 @@ public class BaumApp extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BaumPane root = new BaumPane();
-			ShowSceneGraph.showSceneGraph(null, root);
+			SceneGraphDisplay sgd = new SceneGraphDisplay(false);
+			sgd.showSceneGraph(null, root);
 			Scene scene = new Scene(root, 650, 550);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
