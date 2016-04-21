@@ -17,6 +17,7 @@ public class QSortChar {
 			return;
 		}
 		int p = partition(from, to);
+		System.out.println("p="+p);
 		sort(from, p);
 		sort(p + 1, to);
 	}
