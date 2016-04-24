@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bb.FormController">
+   <bottom>
+      <HBox alignment="CENTER" style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="rechnen" mnemonicParsing="false" onAction="#rechnen" text="Rechnen">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </HBox>
+   </bottom>
+   <center>
+      <FlowPane alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <fx:include fx:id="v1" source="Bruch.fxml" />
+            <ComboBox fx:id="operator">
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </FlowPane.margin></ComboBox>
+           <fx:include fx:id="v2" source="Bruch.fxml" />
+            <Label text="=">
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </FlowPane.margin></Label>
+            <fx:include fx:id="v3" source="Bruch.fxml" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </FlowPane>
+   </center>
+</BorderPane>

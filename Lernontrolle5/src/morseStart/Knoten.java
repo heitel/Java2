@@ -70,16 +70,7 @@ public class Knoten {
 	}
 
 	public String find(String morse) {
-		if (morse.length() == 0) {
-			return data.getZeichen();
-		}
-		int index = 0;
-		if (morse.charAt(0) == '-') {
-			index = 1;
-		}
-		if (child[index] != null) {
-			return child[index].find(morse.substring(1));
-		}
+		//...
 
 		return null;
 	}
