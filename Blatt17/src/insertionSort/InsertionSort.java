@@ -2,7 +2,7 @@ package insertionSort;
 
 public class InsertionSort {
 	private char a[];
-	private int step = 0;
+	private int step = 1;
 
 	public InsertionSort(char[] a) {
 		this.a = a;
@@ -10,21 +10,15 @@ public class InsertionSort {
 
 	public boolean sortOne() {
 		if (step < a.length) {
-			// min suchen
-			int minPos = step;
-			char min = a[step];
-			for (int i = step; i < a.length; i++) {
-				if (a[i] < min) {
-					minPos = i;
-					min = a[i];
-				}
+			char tmp = a[step];
+			// find insertion location
+			int j = step;
+			while (j>0 && a[j-1]>tmp) {
+				a[j] = a[j-1];
+				j--;
 			}
-			// aufrutschen
-			char tmp = a[minPos];
-			for (int i = minPos; i > step; i--) {
-				a[i] = a[i-1];
-			}
-			a[step] = tmp;
+			// insert element
+			a[j] = tmp;
 			
 			step++;
 			return true;
@@ -33,7 +27,7 @@ public class InsertionSort {
 	}
 	
 	public static void main(String args[]) {
-		char[] a = "DHBWMANNHEIM".toCharArray();
+		char[] a = "KÖNIGSTUHL".toCharArray();
 		InsertionSort s = new InsertionSort(a);
 		System.out.println(a);
 		while (s.sortOne()) {
