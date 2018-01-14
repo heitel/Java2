@@ -4,16 +4,16 @@ public class Dodon {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int anz = 1000;// 10;
+		int anz = 10;// 10;
 		boolean tor[] = new boolean[anz];
 
 		intro();
 		System.out.println("Anzahl der Türen: " + anz);
 
 		for (int i = 1; i <= tor.length; i++) {
-			// printBlack(i+".\t| ");
+			printBlack(i+".\t| ");
 			durchgang(tor, i);
-			// show(tor);
+			show(tor);
 		}
 		zeigeOffene(tor);
 	}
