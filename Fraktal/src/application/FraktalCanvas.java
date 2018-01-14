@@ -35,8 +35,8 @@ public class FraktalCanvas extends ResizeableCanvas {
 	public FraktalCanvas() {
 		initColorTable();
 		initEbene();
-		engine = new FraktalEngine(xmin, ymin, dx, FraktalEngine.MANDEL, FraktalEngine.MU,
-				FraktalEngine.CONSTC[14], FraktalEngine.CONSTC[15], colorTable, bImage);
+		engine = new FraktalEngine(xmin, ymin, dx, FraktalEngine.MANDEL, FraktalEngine.MU, FraktalEngine.CONSTC[14],
+				FraktalEngine.CONSTC[15], colorTable, bImage);
 		// EventHandler
 		setOnScroll(e -> wheel(e));
 		setOnMouseMoved(e -> move(e));
@@ -145,8 +145,8 @@ public class FraktalCanvas extends ResizeableCanvas {
 			engine.setbImage(bImage);
 			engine.doCalc(synch);
 		} else {
-			final int bigWidth = 2250;
-			final int bigHeight = 1500;
+			final int bigWidth = 2250 * 4;
+			final int bigHeight = 1500 * 4;
 			double scale = Math.min(bImage.getWidth() / bigWidth, bImage.getHeight() / bigHeight);
 			WritableImage img = new WritableImage(bigWidth, bigHeight);
 			double deltaX = dx * scale;
@@ -155,9 +155,8 @@ public class FraktalCanvas extends ResizeableCanvas {
 				cTable[i] = new Color(colorTable[i].getRed(), colorTable[i].getGreen(), colorTable[i].getBlue(),
 						colorTable[i].getOpacity());
 			}
-			FraktalEngine offEngine = new FraktalEngine(xmin, ymin, deltaX, 
-					engine.getType(), engine.getEbene(), engine.getCr(), engine.getCi(),
-					cTable, img);
+			FraktalEngine offEngine = new FraktalEngine(xmin, ymin, deltaX, engine.getType(), engine.getEbene(),
+					engine.getCr(), engine.getCi(), cTable, img);
 			offEngine.doCalc(true);
 			Platform.runLater(() -> saveImg(img));
 		}
