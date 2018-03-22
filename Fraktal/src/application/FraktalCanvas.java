@@ -15,6 +15,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.paint.Color;
 
 public class FraktalCanvas extends ResizeableCanvas {
@@ -38,11 +39,26 @@ public class FraktalCanvas extends ResizeableCanvas {
 		engine = new FraktalEngine(xmin, ymin, dx, FraktalEngine.MANDEL, FraktalEngine.MU, FraktalEngine.CONSTC[14],
 				FraktalEngine.CONSTC[15], colorTable, bImage);
 		// EventHandler
-		setOnScroll(e -> wheel(e));
+//		setOnScroll(e -> wheel(e));
 		setOnMouseMoved(e -> move(e));
 		setOnMouseDragged(e -> drag(e));
 		setOnMousePressed(e -> press(e));
 		setOnMouseReleased(e -> release(e));
+		setOnZoom(e->zoom(e));
+		setOnZoomStarted(e->zoomStarted(e));
+		setOnZoomFinished(e->zoomFinish(e));
+	}
+
+	private void zoomStarted(ZoomEvent e) {
+		System.out.println("zoomStarted " + e);
+	}
+
+	private void zoom(ZoomEvent e) {
+		System.out.println("zoom " + e);
+	}
+
+	private void zoomFinish(ZoomEvent e) {
+		System.out.println("zoomFinish " + e);
 	}
 
 	private void move(MouseEvent e) {
